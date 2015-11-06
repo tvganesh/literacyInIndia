@@ -99,14 +99,15 @@ indiaLiteracy <- function(region,peopleType,literacyLevel)
     # Set title and plot
     atitle <- paste("Percentage",literacyLevel,"in",region,peopleType)
     ggplot() + geom_map(data=df, aes(map_id = Area.Name, fill = percentages),
-                        map = ind,,color="black",size=0.25) + 
+                        map = ind,color="black",size=0.25) + 
         expand_limits(x = ind$long, y = ind$lat) + 
         scale_fill_distiller(name="Percent", palette = "OrRd")+
         geom_text(data = labels, aes(x = xc, y = yc, label = label))+
         ggtitle(atitle) +
         geom_text(aes(label="Top 5",90,12),colour="blue")+
         geom_text(aes(label="Data source:https://data.gov.in",85,40)) +
-        xlab("Longitude") + ylab("Latitude")
+        xlab("Longitude") + ylab("Latitude") +
+        coord_map()
     
     
     

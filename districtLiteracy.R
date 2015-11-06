@@ -288,14 +288,15 @@ districtEdu <- function(state,peopleType,eduInst){
     # Create a data frame which can be used with ggplot with Area.Name and selected column
     d <- data.frame(peoplePercent$Area.Name,peoplePercent[,w])
     names(d) <-c("Area.Name","EduInst")
-    ggplot() + geom_map(data = d, aes(map_id = Area.Name, fill = EduInst),  
-                        ,map = dist,color="black",size=0.25) + 
+    ggplot() + geom_map(data = d, aes(map_id = Area.Name, fill = EduInst),
+                        map = dist,color="black",size=0.25) + 
         expand_limits(x = dist$long, y = dist$lat) +  
         scale_fill_distiller(name="Percent", palette = "YlGn")+
         labs(title=atitle)+
         geom_text(data = labels, aes(x = xc, y = yc, label = label))+
         #geom_text(aes(label="Data source:https://data.gov.in",maxLong-1,minLat+0.1)) +
-        xlab("Longitude") + ylab("Latitude")
+        xlab("Longitude") + ylab("Latitude") +
+        coord_map()
     
     
 }
