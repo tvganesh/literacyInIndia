@@ -91,9 +91,9 @@ districtEdu <- function(state,peopleType,eduInst){
     b <- filter(a,grepl("District",Area.Name))
     c <- filter(b,Total..Rural..Urban=="Total")
     c$Area.Name <-gsub("District - ","",c$Area.Name)
-    c$Area.Name <- gsub("\\d+","",c$Area.Name)
+    c$Area.Name <- gsub("[0-9]+","",c$Area.Name)
     c$Area.Name <- gsub(" |\\*","",c$Area.Name)
-    
+   
     # Name colums for manageability
     df <- NULL
     df <- c[,5:28]

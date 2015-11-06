@@ -14,6 +14,7 @@ library(maptools)
 library(ggplot2)
 library(dplyr)
 library(stringr)
+library(reshape2)
 
 
 source("./eduLevels.R", local=TRUE)
@@ -28,15 +29,17 @@ colnames(a) <- gsub("Educational.level...","",colnames(a))
 
 # Clean the Area.Name
 a$Area.Name <-gsub("State - ","",a$Area.Name)
-a$Area.Name <- gsub("\\d+","",a$Area.Name)
+#a$Area.Name <- gsub("\\d+","",a$Area.Name)
+a$Area.Name <- gsub("[0-9]+","",a$Area.Name)
 # Remove trailing spaces
 a$Area.Name <- gsub("[[:space:]]*$","",a$Area.Name)
 
 # Get unique state names
 states <- unique(a$Area.Name)
 
-# Load the fortified INDIa shapefile
-load(file="./INDIA_SHP/ind.RData")
+# Read spatial data
+ind <- readShapeSpatial("./India_SHP/INDIA.shp")
+ind <- fortify(ind, region = "ST_NAME")
 
 shinyServer(function(input, output,session) {
     

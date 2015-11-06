@@ -30,7 +30,7 @@ indiaLiteracy <- function(region,peopleType,literacyLevel)
     # Remove the row corresponding to India
     peoplePercent <- peoplePercent[2:length(rownames(peoplePercent)),]
     peoplePercent$Area.Name <-gsub("State - ","",peoplePercent$Area.Name)
-    peoplePercent$Area.Name <- gsub("\\d+","",peoplePercent$Area.Name)
+    peoplePercent$Area.Name <- gsub("[0-9]+","",peoplePercent$Area.Name)
     
     # Remove trailing spaces
     peoplePercent$Area.Name <- gsub("[[:space:]]*$","",peoplePercent$Area.Name)
