@@ -25,20 +25,36 @@ stateLiteracy <- function(df,peopleType,type,state,literacyLevel) {
     
     # Subset based on state and region
     b <- filter(a,Area.Name==state & Total..Rural..Urban==type)
-       
+    
     # Select colums from 7 - 19
-    c <- b[,7:19]
+    c <- b[,7:49]
     
     # Set names of columns
-    names(c) <-c("Age","Persons","Males","Females","EduPersons","EduMales",
-                 "EduFemales","IlliteratePersons","IlliterateMales",
-                 "IlliterateFemales","LiteratePersons","LiterateMales","LiterateFemales")
+    #names(c) <-c("Age","Persons","Males","Females","EduPersons","EduMales",
+    #             "EduFemales","IlliteratePersons","IlliterateMales",
+    #            "IlliterateFemales","LiteratePersons","LiterateMales","LiterateFemales")
+    
+    names(c) <-c("Age","Persons","Males","Females",
+                 "EduPersons","EduMales","EduFemales",
+                 "IlliteratePersons","IlliterateMales","IlliterateFemales",
+                 "LiteratePersons","LiterateMales","LiterateFemales",
+                 "LiterateWithoutEduPersons","LiterateWithoutEduMales","LiterateWithoutEduFemales",
+                 "BelowPrimaryPersons","BelowPrimaryMales","BelowPrimaryFemales",
+                 "PrimaryPersons","PrimaryMales","PrimaryFemales",
+                 "MiddlePersons","MiddleMales","MiddleFemales",
+                 "MatricSecPersons","MatricSecMales","MatricSecFemales",
+                 "HigherSecIntmdtPersons","HigherSecIntmdtMales","HigherSecIntmdtFemales",
+                 "NonTechnicalDiplomaPersons","NonTechnicalDiplomaMales","NonTechnicalDiplomaFemales",
+                 "TechnicalDiplomaPersons","TechnicalDiplomaMales","TechnicalDiplomaFemales",
+                 "GraduatePersons","GraduateMales","GraduateFemales",
+                 "UnclassifiedPersons","UnclassifiedMales","UnclassifiedFemales"            
+    )
     
     # Subset columns with peopleType
     people <- select(c,matches(peopleType,ignore.case=FALSE))
     
     # Calculate  percent 
-    peoplePercent <- people[,2:4]/people[,1]*100
+    peoplePercent <- people[,2:14]/people[,1]*100
     
     # Add the age column
     peoplePercent <- cbind(c[1],peoplePercent)
@@ -51,18 +67,31 @@ stateLiteracy <- function(df,peopleType,type,state,literacyLevel) {
     m <- filter(a,Area.Name=="INDIA" & Total..Rural..Urban==type)
     
     # Select colums from 7 - 19
-    n <- m[,7:19]
+    n <- m[,7:49]
     # Set names
-    names(n) <-c("Age","Persons","Males","Females","EduPersons","EduMales",
-                 "EduFemales","IlliteratePersons","IlliterateMales",
-                 "IlliterateFemales","LiteratePersons","LiterateMales","LiterateFemales")
+    names(n) <-c("Age","Persons","Males","Females",
+                 "EduPersons","EduMales","EduFemales",
+                 "IlliteratePersons","IlliterateMales","IlliterateFemales",
+                 "LiteratePersons","LiterateMales","LiterateFemales",
+                 "LiterateWithoutEduPersons","LiterateWithoutEduMales","LiterateWithoutEduFemales",
+                 "BelowPrimaryPersons","BelowPrimaryMales","BelowPrimaryFemales",
+                 "PrimaryPersons","PrimaryMales","PrimaryFemales",
+                 "MiddlePersons","MiddleMales","MiddleFemales",
+                 "MatricSecPersons","MatricSecMales","MatricSecFemales",
+                 "HigherSecIntmdtPersons","HigherSecIntmdtMales","HigherSecIntmdtFemales",
+                 "NonTechnicalDiplomaPersons","NonTechnicalDiplomaMales","NonTechnicalDiplomaFemales",
+                 "TechnicalDiplomaPersons","TechnicalDiplomaMales","TechnicalDiplomaFemales",
+                 "GraduatePersons","GraduateMales","GraduateFemales",
+                 "UnclassifiedPersons","UnclassifiedMales","UnclassifiedFemales"
+                 
+    )
     
     
     # Subset columns with persons
     natPeople <- select(n,matches(peopleType,ignore.case=FALSE))
     
     # Calculate males percent as percent of total males
-    natPeoplePercent <- natPeople[,2:4]/natPeople[,1]*100
+    natPeoplePercent <- natPeople[,2:14]/natPeople[,1]*100
     
     # Add the age column
     natPeoplePercent <- cbind(c[1],natPeoplePercent)
@@ -98,7 +127,7 @@ stateLiteracy <- function(df,peopleType,type,state,literacyLevel) {
     with(data=natPeoplePercent,lines(natPeople,natPeoplePercent[,w],col="black",lty=3,lwd=3))
     legend(x="topright",c("National Average"), lty=c(3),   
            lwd=c(3),col=c("black"))
-
+    
     
     
     
@@ -111,11 +140,23 @@ allPercent <- function(df,region,state, literacyLevel) {
     b <- filter(a,Area.Name==state & Total..Rural..Urban==region)
     
     # Select colums from 7 - 19
-    c <- b[,7:19]
+    c <- b[,7:49]
     # Set names
-    names(c) <-c("Age","Persons","Males","Females","EduPersons","EduMales",
-                 "EduFemales","IlliteratePersons","IlliterateMales",
-                 "IlliterateFemales","LiteratePersons","LiterateMales","LiterateFemales")
+    names(c) <-c("Age","Persons","Males","Females",
+                 "EduPersons","EduMales","EduFemales",
+                 "IlliteratePersons","IlliterateMales","IlliterateFemales",
+                 "LiteratePersons","LiterateMales","LiterateFemales",
+                 "LiterateWithoutEduPersons","LiterateWithoutEduMales","LiterateWithoutEduFemales",
+                 "BelowPrimaryPersons","BelowPrimaryMales","BelowPrimaryFemales",
+                 "PrimaryPersons","PrimaryMales","PrimaryFemales",
+                 "MiddlePersons","MiddleMales","MiddleFemales",
+                 "MatricSecPersons","MatricSecMales","MatricSecFemales",
+                 "HigherSecIntmdtPersons","HigherSecIntmdtMales","HigherSecIntmdtFemales",
+                 "NonTechnicalDiplomaPersons","NonTechnicalDiplomaMales","NonTechnicalDiplomaFemales",
+                 "TechnicalDiplomaPersons","TechnicalDiplomaMales","TechnicalDiplomaFemales",
+                 "GraduatePersons","GraduateMales","GraduateFemales",
+                 "UnclassifiedPersons","UnclassifiedMales","UnclassifiedFemales"            
+    )
     
     
     
@@ -126,11 +167,11 @@ allPercent <- function(df,region,state, literacyLevel) {
     
     
     # Calculate males percent as percent of total males
-    malesPercent <- males[,2:4]/males[,1]*100
+    malesPercent <- males[,2:14]/males[,1]*100
     # Calculate females percent as percent of total females
-    femalesPercent <- females[,2:4]/females[,1]*100
+    femalesPercent <- females[,2:14]/females[,1]*100
     # Calculate persons percent as percent of total persons
-    personsPercent <- persons[,2:4]/persons[,1]*100
+    personsPercent <- persons[,2:14]/persons[,1]*100
     
     # Add the age column
     malesPercent <- cbind(c[1],malesPercent)
